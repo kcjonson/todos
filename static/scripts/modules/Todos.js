@@ -27,9 +27,12 @@ define([
 		},
 		
 		_initializeModel: function() {		
-			this._model = new TodosModel({});
+			this._model = new TodosModel({
+				id: "1"
+			});
 			this._model.on("change", _.bind(this._onModelChange, this));
-			this._model.fetch({});
+			
+			this._model.fetch();
 		},
 		
 		_initializeTemplate: function() {
@@ -50,18 +53,21 @@ define([
 		},
 		
 		_onModelChange: function(model) {
-			console.log('Model Change', model, model.get('todos'));
+			//console.log('Model Change', model, model.get('todos'));
 			
 			var todos = model.get('todos');
-			todos.forEach(function(todo){
-				this._createTodo(todo);
-			}, this)
+			if (todos) {
+				todos.forEach(function(todo){
+					this._createTodo(todo);
+				}, this)
+			}
 			
 		},
 		
 		_createTodo: function(todoModel) {
-			console.log('creating todo', this._listNode);
-			var todoWidget = new Todo();
+			var todoWidget = new Todo({
+				model: todoModel
+			});
 			this._listNode.appendChild(todoWidget.el);
 		}
 
