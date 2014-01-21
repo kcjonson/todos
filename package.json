@@ -1,0 +1,19 @@
+{ 
+        "author": {
+                "name": "Kevin Jonson",
+                "email": "kcjonson@gmail.com",
+                "url": "http://kevinjonson.com"
+        },
+        "name": "todos",
+        "description": "Node.js based Todos list",
+        "version": "0.0.1",
+        "repository": {
+                "type": "git",
+                "url":  "git://github.com/kcjonson/todos.git" },
+        "main:": "./lib/todos.js",
+        "license": "MIT",
+        "private": false,
+        "dependencies": {
+	        "express": "3.x"
+        }
+}
