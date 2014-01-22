@@ -4,14 +4,16 @@ define([
 	'backbone',
 	'text!modules/Todos.html',
 	'modules/Todo',
-	'modules/TodosModel'
+	'modules/TodosModel',
+	'modules/TodoModel'
 ], function(
 	$,
 	_,
 	Backbone,
 	templateString,
 	Todo,
-	TodosModel
+	TodosModel,
+	TodoModel
 ){
 	
 	
@@ -19,19 +21,21 @@ define([
 
 	return Backbone.View.extend({
 
-		initialize: function() {
-			
+
+	// Init
+
+		initialize: function() {			
 			this._initializeTemplate();
 			this._initializeModel();
-
+			
+			this._submitNode.addEventListener("click", _.bind(this._onSubmitClick, this))
 		},
 		
 		_initializeModel: function() {		
 			this._model = new TodosModel({
-				id: "1"
+				_id: "52e034adcf8fabbc24f7ecff"
 			});
 			this._model.on("change", _.bind(this._onModelChange, this));
-			
 			this._model.fetch();
 		},
 		
@@ -52,6 +56,9 @@ define([
 			};
 		},
 		
+		
+	// Event Handlers
+		
 		_onModelChange: function(model) {
 			//console.log('Model Change', model, model.get('todos'));
 			
@@ -63,6 +70,22 @@ define([
 			}
 			
 		},
+		
+		_onSubmitClick: function() {
+			console.log('click');
+
+			var todosCollection = this._model.get('todos');
+			var todoModel = new TodoModel({
+				title: 'Foo'
+			});
+			todosCollection.add(todoModel);
+
+
+			this._model.save();
+		},
+		
+		
+	// Utilities 
 		
 		_createTodo: function(todoModel) {
 			var todoWidget = new Todo({

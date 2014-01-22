@@ -1,41 +1,31 @@
 define([
 	'jquery',
 	'underscore',
-	'backbone-loader'
+	'backbone-loader',
+	'modules/TodoModel'
 ], function(
 	$,
 	_,
-	Backbone
+	Backbone,
+	TodoModel
 ){
 	
-
-	
-	
-	var todoModel = Backbone.RelationalModel.extend({
-
-	});
-	
-	
 	var todosCollection = Backbone.Collection.extend({
-		model: todoModel
+		model: TodoModel
 	});
-	
-
-	
 
 	return Backbone.RelationalModel.extend({
 		urlRoot: 'api/todos',
+		idAttribute: '_id',
 
 		relations: [
 			{
 				type: Backbone.HasMany,
 				key: 'todos',
-				relatedModel: todoModel,
-				includeInJSON: Backbone.Model.prototype.idAttribute,
+				relatedModel: TodoModel,
 				collectionType: todosCollection,
 				reverseRelation: {
-					key: 'containedIn',
-					includeInJSON: 'id'
+					key: 'containedIn'
 				}
 			}
 		]

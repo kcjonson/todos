@@ -10,6 +10,7 @@
 	var server = express();
 	server.use(express.logger('dev'));
 	server.use(express.static(__dirname + '/static'));
+	server.use(express.bodyParser());
 	server.use(server.router);
 	
 	

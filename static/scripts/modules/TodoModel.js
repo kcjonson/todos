@@ -1,21 +1,16 @@
 define([
 	'jquery',
 	'underscore',
-	'backbone'
+	'backbone-loader'
 ], function(
 	$,
 	_,
 	Backbone
 ){
-	
-	
-	
 
-	return Backbone.Model.extend({
-
-
+	return Backbone.RelationalModel.extend({
+		urlRoot: 'api/todo',
+		idAttribute: '_id'
 	});
 
-
-	
 });

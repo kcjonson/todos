@@ -46,7 +46,7 @@ define([
 		
 		_onModelChange: function() {
 			console.log('Todo Model Change', this.model);
-			this._titleNode.innerHTML = this.model.get('label');
+			this._titleNode.innerHTML = this.model.get('title');
 		}
 
 		
