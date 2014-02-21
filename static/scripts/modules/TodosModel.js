@@ -26,7 +26,8 @@ define([
 				collectionType: todosCollection,
 				reverseRelation: {
 					key: 'containedIn'
-				}
+				},
+				collectionKey: '_id'
 			}
 		]
 

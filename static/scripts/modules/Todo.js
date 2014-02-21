@@ -20,11 +20,12 @@ define([
 			this._initializeTemplate();
 			
 			if (arguments[0].model) {
-				this.model = arguments[0].model;
+				this._model = arguments[0].model;
 				this._onModelChange();
 			}
 			
-
+			this._deleteNode.addEventListener('click', _.bind(this._onDeleteClick, this));
+			
 		},
 		
 		_initializeTemplate: function() {
@@ -47,6 +48,11 @@ define([
 		_onModelChange: function() {
 			console.log('Todo Model Change', this.model);
 			this._titleNode.innerHTML = this.model.get('title');
+		},
+		
+		_onDeleteClick: function() {
+			console.log('delete');
+			this._model.destroy();
 		}
 
 		

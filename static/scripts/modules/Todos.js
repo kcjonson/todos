@@ -33,9 +33,11 @@ define([
 		
 		_initializeModel: function() {		
 			this._model = new TodosModel({
-				_id: "52e034adcf8fabbc24f7ecff"
+				_id: "52fec37aab80e8610dfedab3"
 			});
 			this._model.on("change", _.bind(this._onModelChange, this));
+			this._model.on("add:todos", _.bind(this._onTodoAdd, this));
+			this._model.on("remove:todos", _.bind(this._onTodoRemove, this));		
 			this._model.fetch();
 		},
 		
@@ -58,30 +60,38 @@ define([
 		
 		
 	// Event Handlers
+	
+		_onTodoAdd: function(todo) {
+			console.log('Todo Added', todo);
+			this._createTodo(todo);
+
+				
+		},
+		
+		_onTodoRemove: function(todo) {
+			console.log('Todo Removed', todo);
+			//this._createTodo(todo);
+
+				
+		},
 		
 		_onModelChange: function(model) {
-			//console.log('Model Change', model, model.get('todos'));
+			console.log('Model Change', model, model.get('todos'));
 			
-			var todos = model.get('todos');
-			if (todos) {
-				todos.forEach(function(todo){
-					this._createTodo(todo);
-				}, this)
-			}
 			
 		},
 		
 		_onSubmitClick: function() {
-			console.log('click');
-
+			console.log('click', this._textNode.value);
+			
 			var todosCollection = this._model.get('todos');
 			var todoModel = new TodoModel({
-				title: 'Foo'
+				title: this._textNode.value
 			});
 			todosCollection.add(todoModel);
-
-
 			this._model.save();
+			
+			this._textNode.value = "";
 		},
 		
 		
