@@ -21,6 +21,7 @@ define([
 			
 			if (arguments[0].model) {
 				this._model = arguments[0].model;
+				this._model.on("destroy", _.bind(this._onModelDestroy, this));
 				this._onModelChange();
 			}
 			
@@ -48,6 +49,12 @@ define([
 		_onModelChange: function() {
 			console.log('Todo Model Change', this.model);
 			this._titleNode.innerHTML = this.model.get('title');
+		},
+
+		_onModelDestroy: function() {
+			console.log('Todo Model Destroy');
+			this.undelegateEvents();
+			this.remove();
 		},
 		
 		_onDeleteClick: function() {

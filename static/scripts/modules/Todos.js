@@ -71,7 +71,7 @@ define([
 		_onTodoRemove: function(todo) {
 			console.log('Todo Removed', todo);
 			//this._createTodo(todo);
-
+			
 				
 		},
 		
