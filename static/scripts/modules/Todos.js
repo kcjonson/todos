@@ -71,7 +71,7 @@ define([
 		_onTodoRemove: function(todo) {
 			console.log('Todo Removed', todo);
 			//this._createTodo(todo);
-			
+
 				
 		},
 		
@@ -86,7 +86,8 @@ define([
 			
 			var todosCollection = this._model.get('todos');
 			var todoModel = new TodoModel({
-				title: this._textNode.value
+				title: this._textNode.value,
+				_creationId: Math.random().toString(36).substr(2, 9)
 			});
 			todosCollection.add(todoModel);
 			this._model.save();

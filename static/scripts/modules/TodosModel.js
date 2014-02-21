@@ -14,7 +14,7 @@ define([
 		model: TodoModel
 	});
 
-	return Backbone.RelationalModel.extend({
+	var todosModel =  Backbone.RelationalModel.extend({
 		urlRoot: 'api/todos',
 		idAttribute: '_id',
 
@@ -32,7 +32,7 @@ define([
 		]
 
 	});
-
-
+	
+	return todosModel;
 	
 });

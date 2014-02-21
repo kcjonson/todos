@@ -22,7 +22,7 @@ define([
 			if (arguments[0].model) {
 				this._model = arguments[0].model;
 				this._model.on("destroy", _.bind(this._onModelDestroy, this));
-				this._onModelChange();
+				this._updateDisplay();
 			}
 			
 			this._deleteNode.addEventListener('click', _.bind(this._onDeleteClick, this));
@@ -45,10 +45,14 @@ define([
 				}, this));
 			};
 		},
+
+		_updateDisplay: function() {
+			this._titleNode.innerHTML = this.model.get('title');
+		},
 		
 		_onModelChange: function() {
 			console.log('Todo Model Change', this.model);
-			this._titleNode.innerHTML = this.model.get('title');
+			this._updateDisplay();
 		},
 
 		_onModelDestroy: function() {
