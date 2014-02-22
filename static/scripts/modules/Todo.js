@@ -15,28 +15,33 @@ define([
 
 	return Backbone.View.extend({
 
+		tagName: "li",
+		className: "Todo",
+		template: _.template(templateString),
+
+
+
+	// Public 
+
 		initialize: function() {
-			
-			this._initializeTemplate();
-			
+			this.render();
+			//this._initializeTemplate();			
 			if (arguments[0].model) {
 				this._model = arguments[0].model;
 				this._model.on("destroy", _.bind(this._onModelDestroy, this));
+				this._model.on("change", _.bind(this._onModelChange, this));
 				this._updateDisplay();
 			}
 			
 			this._deleteNode.addEventListener('click', _.bind(this._onDeleteClick, this));
-			
+			this._completeNode.addEventListener('click', _.bind(this._onCompleteClick, this));
 		},
-		
-		_initializeTemplate: function() {
-		
-			// Consume template string
-			if (templateString) {
-				var templateDom = _.template(templateString);
-				this.$el.html(templateDom);
-			};
-			
+
+		render: function() {
+
+			// Render Template
+			this.$el.html(this.template());
+
 			// Collect attach points
 			if (this.$el) {
 				$('[data-attach-point]', this.$el).each(_.bind(function(index, attachPointNode){
@@ -46,10 +51,23 @@ define([
 			};
 		},
 
-		_updateDisplay: function() {
-			this._titleNode.innerHTML = this.model.get('title');
+
+
+	// User Event Handlers
+
+		_onDeleteClick: function() {
+			//console.log('delete');
+			this._model.destroy();
 		},
-		
+
+		_onCompleteClick: function() {
+			this._model.set('completed', true);
+			this._model.save();
+		},
+
+
+	// Data Event Handlers
+
 		_onModelChange: function() {
 			console.log('Todo Model Change', this.model);
 			this._updateDisplay();
@@ -60,11 +78,19 @@ define([
 			this.undelegateEvents();
 			this.remove();
 		},
-		
-		_onDeleteClick: function() {
-			console.log('delete');
-			this._model.destroy();
+
+
+	// Private
+
+
+		_updateDisplay: function() {
+			this._titleNode.innerHTML = this.model.get('title');
+			this.$el.toggleClass('completed', this.model.get('completed'));
 		}
+		
+
+		
+
 
 		
 	});

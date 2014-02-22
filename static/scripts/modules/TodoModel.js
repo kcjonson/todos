@@ -10,7 +10,11 @@ define([
 
 	var todoModel = Backbone.RelationalModel.extend({
 		urlRoot: 'api/todo',
-		idAttribute: '_id'
+		idAttribute: '_id',
+		defaults: {
+			'completed': false,
+			'title': 'Untitled'
+		}
 	});
 
 
@@ -26,7 +30,8 @@ define([
 			model = coll.find( function(m) {
 				var _creationId = m.get('_creationId');
 				if (_creationId && _creationId == attributes._creationId) {
-					m.unset('_creationId', {silent: true});
+					m.unset('_creationId');
+					delete attributes._creationId;
 					return true;
 				} else {
 					return false;

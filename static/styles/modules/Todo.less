@@ -1,4 +1,47 @@
 
+	@todo-cell-padding: 10px;
+
 	.Todo {
+		display: table-row;
+
+		> * {
+			display: table-cell;
+			border-top: 1px solid @border-color;
+			padding-top: @todo-cell-padding;
+			padding-bottom: @todo-cell-padding;
+		}
+
+		&:first-child >  *{
+			border-top: none;
+		}
 		
+		.title {
+			padding-left: @todo-cell-padding;
+		}
+
+		.actions {
+			padding-right: @todo-cell-padding;
+			
+			> * {
+				visibility: hidden;
+				cursor: pointer;
+				font-size: 0.8em;
+				display: inline-block;
+
+				&:hover {
+					color: red;
+				}
+			}
+		}
+
+		&:hover .actions > * {
+			visibility: visible;
+		}
+
+		&.completed {
+			color: #888888;
+		}
+
+
+
 	}

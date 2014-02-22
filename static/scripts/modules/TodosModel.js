@@ -25,14 +25,14 @@ define([
 				relatedModel: TodoModel,
 				collectionType: todosCollection,
 				reverseRelation: {
-					key: 'containedIn'
-				},
-				collectionKey: '_id'
+					key: 'containedIn',
+					includeInJSON: '_id'
+				}
 			}
 		]
 
 	});
-	
+
 	return todosModel;
 	
 });
