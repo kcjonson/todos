@@ -1,8 +1,12 @@
 <div class='Todos'>
 	<h2>Todos:</h2>
+	<span class='action add' data-attach-point='_addActionNode'>Add</span>
 	<ol class='list' data-attach-point='_listNode'></ol>
-	<div class='add'>
-		<input type='text' data-attach-point='_textNode' />
+	<div class='dialog add hidden' data-attach-point='_addDialogNode'>
+		<label for='titleInput'>Title</label>
+		<input type='text' id='titleInput' data-attach-point='_titleNode' />
+		<label for='descriptionInput'>Description</label>
+		<textarea class='description' id='descriptionInput' data-attach-point='_descriptionNode'></textarea>
 		<button data-attach-point='_submitNode'>Submit</button>
 	</div>
 </div>

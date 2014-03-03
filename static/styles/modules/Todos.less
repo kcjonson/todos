@@ -5,8 +5,7 @@
 	@border-color: #dfdfdf;
 
 	.Todos {
-		max-width: 500px;
-		margin: 0 auto;
+		margin: .5em;
 		margin-top: 15px;
 		
 		
@@ -16,4 +15,36 @@
 			background-color: #fff;
 			width: 100%;
 		}
+
+		.dialog.add {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			box-sizing: border-box;
+			padding: .5em;
+			background-color: #fff;
+
+			* > {
+				display: block;
+				width: 100%;
+				box-sizing: border-box;
+				margin-top: .5em;
+
+				&:first-child {
+					margin-top: 0;
+				}
+			}
+
+			&.hidden {
+				display: none;
+			}
+
+
+		}
+
+
+
+
 	}
