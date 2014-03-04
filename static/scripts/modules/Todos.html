@@ -1,12 +1,28 @@
 <div class='Todos'>
-	<h2>Todos:</h2>
-	<span class='action add' data-attach-point='_addActionNode'>Add</span>
+	<div class='header'>
+		<h2>Todos:</h2>
+		<span class='actions'>
+			<span class='action add' data-attach-point='_addActionNode'>Add</span>
+		</span>
+	</div>
 	<ol class='list' data-attach-point='_listNode'></ol>
 	<div class='dialog add hidden' data-attach-point='_addDialogNode'>
-		<label for='titleInput'>Title</label>
-		<input type='text' id='titleInput' data-attach-point='_titleNode' />
-		<label for='descriptionInput'>Description</label>
-		<textarea class='description' id='descriptionInput' data-attach-point='_descriptionNode'></textarea>
-		<button data-attach-point='_submitNode'>Submit</button>
+		<div class='alignment'>  <!-- non semantic bullshittery for centering -->
+			<div class='contents'>
+				<div class='header'>
+					<h3>Edit</h3>
+					<span class='actions'>
+						<span class='action close' data-attach-point='_closeEditDialogNode'>Close</span>
+					</span>
+				</div>
+				<div class='body'>
+					<label for='titleInput'>Title</label>
+					<input type='text' id='titleInput' data-attach-point='_titleNode' />
+					<label for='descriptionInput'>Description</label>
+					<textarea class='description' id='descriptionInput' data-attach-point='_descriptionNode'></textarea>
+					<button data-attach-point='_submitNode'>Submit</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

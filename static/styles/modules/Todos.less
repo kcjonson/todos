@@ -5,7 +5,34 @@
 	@border-color: #dfdfdf;
 
 	.Todos {
-		margin-top: 15px;
+
+		> .header {
+			background-color: #2078C7;
+			color: #fff;
+			display: table;
+			width: 100%;
+
+			* > {
+				display: table-cell;
+				padding: 5px;
+				vertical-align: middle;
+			}
+
+			h2 {
+				width: 100%;
+			}
+
+			.actions {
+
+
+				.action {
+					float: right;
+				}
+
+
+			}
+
+		}
 		
 		
 		.list {
@@ -19,21 +46,83 @@
 			position: absolute;
 			top: 0;
 			left: 0;
-			right: 0;
-			bottom: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.6);
 			box-sizing: border-box;
-			padding: .5em;
-			background-color: #fff;
 
-			* > {
-				display: block;
+			> .alignment {
+				display: table;
 				width: 100%;
-				box-sizing: border-box;
-				margin-top: .5em;
+				height: 100%;
 
-				&:first-child {
-					margin-top: 0;
+
+				> .contents {
+					display: table-cell;
+					vertical-align: middle;
+					padding: .5em;
+					box-sizing: border-box;
+
+					> * {
+						box-shadow: 0 0 .2em rgba(0, 0, 0, 0.2);
+					}
+
+
+					> .header {
+						display: table;
+						width: 100%;
+						background-color: #2078C7;
+						color: #fff;
+						border-top-right-radius: 3px;
+						border-top-left-radius: 3px;
+						box-sizing: border-box;
+
+						* > {
+							display: table-cell;
+							padding: .3em;
+						}
+
+						h3 {
+							width: 100%;
+							padding-left: .7em;
+						}
+
+
+					}
+
+					> .body {
+						background-color: #fff;
+						box-sizing: border-box;
+
+						padding: .5em;
+						border-bottom-right-radius: 3px;
+						border-bottom-left-radius: 3px;
+					}
 				}
+
+			}
+
+			.body {
+				label {
+					margin-top: .5em;
+					padding: .1em;
+				}
+
+				> * {
+					display: block;
+					width: 100%;
+					box-sizing: border-box;
+
+					&:first-child {
+						margin-top: 0;
+					}
+
+				}
+
+				button {
+					margin-top: .8em;
+				}
+
 			}
 
 			&.hidden {

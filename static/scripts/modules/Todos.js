@@ -28,6 +28,7 @@ define([
 			this._initializeTemplate();
 			this._initializeModel();
 			
+			this._closeEditDialogNode.addEventListener("click", _.bind(this._onCloseEditDialogClick, this));
 			this._addActionNode.addEventListener("click", _.bind(this._onAddActionClick, this));
 			this._submitNode.addEventListener("click", _.bind(this._onSubmitClick, this));
 		},
@@ -81,6 +82,10 @@ define([
 		},
 
 		_onAddActionClick: function() {
+			$(this._addDialogNode).toggleClass('hidden');
+		},
+
+		_onCloseEditDialogClick: function() {
 			$(this._addDialogNode).toggleClass('hidden');
 		},
 		
