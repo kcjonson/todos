@@ -4,6 +4,7 @@ define([
 	'backbone',
 	'text!modules/Todos.html',
 	'modules/Todo',
+	'modules/TodoEdit',
 	'modules/TodosModel',
 	'modules/TodoModel'
 ], function(
@@ -12,6 +13,7 @@ define([
 	Backbone,
 	templateString,
 	Todo,
+	TodoEdit,
 	TodosModel,
 	TodoModel
 ){
@@ -82,7 +84,14 @@ define([
 		},
 
 		_onAddActionClick: function() {
-			$(this._addDialogNode).toggleClass('hidden');
+			//$(this._addDialogNode).toggleClass('hidden');
+
+			var todoEditWidget = new TodoEdit({
+				model: this._model
+			});
+			$('body').append(todoEditWidget.el)
+
+
 		},
 
 		_onCloseEditDialogClick: function() {

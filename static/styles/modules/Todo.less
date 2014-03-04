@@ -18,7 +18,6 @@
 
 		> .completed {
 			padding-left: @todo-cell-padding;
-			padding-right: @todo-cell-padding;
 		}
 		
 		.title {
@@ -31,19 +30,29 @@
 			white-space: nowrap;
 			
 			> * {
-				visibility: hidden;
 				cursor: pointer;
 				font-size: 0.8em;
 				display: inline-block;
+				margin-left: .2em;
+
+				&:first-child {
+					margin-left: 0;
+				}
 
 				&:hover {
 					color: red;
 				}
 			}
-		}
 
-		&:hover .actions > * {
-			visibility: visible;
+			svg {
+				width: 1.2em;
+				height: 1.2em;
+
+				path {
+					fill: #2078C7;
+				}
+			}
+
 		}
 
 		&.completed {

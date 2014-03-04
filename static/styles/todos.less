@@ -8,7 +8,7 @@
 
 
 		@media (max-width: 640px) {
-			font-size: 2em;
+			font-size: 1.4em;
 		}
 	}
 
@@ -17,8 +17,17 @@
 		margin: 0px;
 		padding: 2px;
 		font-size: inherit;
-		border: 1px solid black;
+		border: .1em solid #ccc;
 		box-shadow: none;
+		border-radius: 0;
+		-webkit-appearance: none;
+
+		&:focus {
+			outline: none;
+			-webkit-appearance: none;
+			border-color: #A7B209;
+			background-color: lighten(#A7B209, 60%);
+		}
 	}
 
 	button {

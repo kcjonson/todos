@@ -33,6 +33,7 @@ define([
 				this._updateDisplay();
 			}
 			
+			this._editNode.addEventListener('click', _.bind(this._onEditClick, this));
 			this._deleteNode.addEventListener('click', _.bind(this._onDeleteClick, this));
 			this._completeNode.addEventListener('change', _.bind(this._onCompleteChange, this));
 		},
@@ -58,6 +59,10 @@ define([
 		_onDeleteClick: function() {
 			//console.log('delete');
 			this._model.destroy();
+		},
+
+		_onEditClick: function() {
+
 		},
 
 		_onCompleteChange: function(event) {
