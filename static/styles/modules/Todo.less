@@ -14,13 +14,19 @@
 		&:first-child >  *{
 			border-top: none;
 		}
+
+		.completed {
+			padding-left: @todo-cell-padding;
+		}
 		
 		.title {
 			padding-left: @todo-cell-padding;
+			width: 100%;
 		}
 
 		.actions {
 			padding-right: @todo-cell-padding;
+			white-space: nowrap;
 			
 			> * {
 				visibility: hidden;

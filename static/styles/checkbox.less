@@ -1,0 +1,28 @@
+
+	@checkbox-size: 15px;
+
+	input[type='checkbox'] {
+
+		-webkit-appearance: none;
+		width: @checkbox-size;
+		height: @checkbox-size;
+		border: 1px solid black;
+
+
+		&:checked {
+			background-color: red;
+		}
+
+		&:focus {
+			outline: none;
+		}
+
+
+		// &:before {
+		// 	content: '';
+		// 	display: inline-block;
+
+		// }
+
+
+	}

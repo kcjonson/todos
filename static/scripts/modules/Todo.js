@@ -34,7 +34,7 @@ define([
 			}
 			
 			this._deleteNode.addEventListener('click', _.bind(this._onDeleteClick, this));
-			this._completeNode.addEventListener('click', _.bind(this._onCompleteClick, this));
+			this._completeNode.addEventListener('change', _.bind(this._onCompleteChange, this));
 		},
 
 		render: function() {
@@ -60,8 +60,8 @@ define([
 			this._model.destroy();
 		},
 
-		_onCompleteClick: function() {
-			this._model.set('completed', true);
+		_onCompleteChange: function(event) {
+			this._model.set('completed', this._completeNode.checked);
 			this._model.save();
 		},
 
@@ -85,7 +85,9 @@ define([
 
 		_updateDisplay: function() {
 			this._titleNode.innerHTML = this.model.get('title');
-			this.$el.toggleClass('completed', this.model.get('completed'));
+			var completed = this.model.get('completed');
+			this._completeNode.checked = completed;
+			this.$el.toggleClass('completed', completed);
 		}
 		
 
