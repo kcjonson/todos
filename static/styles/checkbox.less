@@ -1,21 +1,40 @@
 
-	@checkbox-size: 15px;
+	@checkbox-size: 24px;
 
 	input[type='checkbox'] {
 
 		-webkit-appearance: none;
+		position: relative;
 		width: @checkbox-size;
 		height: @checkbox-size;
-		border: 1px solid black;
+		border: 1px solid #777;
+		border-radius: 4px;
 
 
 		&:checked {
-			background-color: red;
+			background-color: #bbb;
+
+			&:before {
+				display: inline-block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				padding: 0;
+				height: @checkbox-size -2px;
+				width: @checkbox-size - 4px;
+				text-align: center;
+				font-size: @checkbox-size - 4px;
+				content: '\2713 ';
+				font-weight: bold;
+				text-shadow: 1px 1px 2px rgba(0,0,0,.6);
+				color: #fff;
+			}
 		}
 
 		&:focus {
 			outline: none;
 		}
+
 
 
 		// &:before {
