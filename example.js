@@ -26,10 +26,9 @@
 	  	var errorResponse;
 
 	  	// API Endpoints
-	  	if (url.indexOf('/api/') >= 0) {
+	  	if (url.indexOf('/api/') >= 0 && url.indexOf('/api/login/') == -1) {
 	  		authRequired = true;
 	  		errorResponse = {
-	  			error: true,
   				errorMessage: 'The endpoint you are trying to reach requires authentication',
   				errorType: 'REQUIRES_AUTHENTICATION'
   			}
@@ -60,6 +59,11 @@
 
 	// Todos Endpoints
 	todos.startServer({
+		server: server
+	});
+
+	// Auth Endpoints
+	auth.startServer({
 		server: server
 	});
 	

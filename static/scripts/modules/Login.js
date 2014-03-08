@@ -26,11 +26,8 @@ define([
 
 		initialize: function() {
 			this.render();
-			
-			if (arguments[0].model) {
-				this._model = arguments[0].model;
-			}
 
+			this._submitNode.addEventListener('click', _.bind(this._onSubmitClick, this));
 		},
 
 		render: function() {
@@ -57,6 +54,34 @@ define([
 		hide: function() {
 			this.$el.addClass('hidden');
 		},
+
+	// Event Handlers
+
+		_onSubmitClick: function() {
+			console.log('click');
+
+			var data = {
+				username: 'kevin',
+				password: 'test'
+			};
+
+			$.ajax({
+				type: 'POST',
+				url: '/api/login/',
+				data: {
+					username: this._usernameNode.value,
+					password: this._passwordNode.value
+				},
+				dataType: 'json',
+       			async: false
+			}).done(function(data, status){
+				console.log('suc', data, status);
+			}).fail(function(data, error){
+			 	console.log('fail', data, error);
+			});
+
+
+		}
 
 		
 	});
