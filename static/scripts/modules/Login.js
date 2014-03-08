@@ -58,29 +58,33 @@ define([
 	// Event Handlers
 
 		_onSubmitClick: function() {
-			console.log('click');
 
 			var data = {
-				username: 'kevin',
-				password: 'test'
+				username: this._usernameNode.value,
+				password: this._passwordNode.value
 			};
 
 			$.ajax({
 				type: 'POST',
 				url: '/api/login/',
-				data: {
-					username: this._usernameNode.value,
-					password: this._passwordNode.value
-				},
+				data: data,
 				dataType: 'json',
        			async: false
-			}).done(function(data, status){
-				console.log('suc', data, status);
-			}).fail(function(data, error){
-			 	console.log('fail', data, error);
-			});
+			})
+			.done(_.bind(this._onSubmitDone, this))
+			.fail(_.bind(this._onSubmitFail, this));
 
 
+		},
+
+		_onSubmitDone: function(data) {
+			this._errorNode.innerHTML = '';
+			this.trigger('authentication:done')
+		},
+
+		_onSubmitFail: function(data) {
+			var errorMessage = data.responseJSON.errorMessage;
+			this._errorNode.innerHTML = errorMessage;
 		}
 
 		

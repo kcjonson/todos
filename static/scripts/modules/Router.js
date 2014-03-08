@@ -18,6 +18,7 @@ define([
 	return Backbone.Router.extend({
 
 		routes: {
+			'todos': 'todos',
 			'': 'todos',
 			'login': 'login'
 		},
@@ -36,12 +37,12 @@ define([
 		},
 
 		todos: function() {
-			console.log('list')
+			//console.log('list')
 			if (!views.todos) {
 				views.todos = new Todos({
 	 				el: $('#todos')
 				});
-				views.todos.on('error:authentication', _.bind(function(){
+				views.todos.on('authentication:error', _.bind(function(){
 					this.navigate('login', {trigger: true});
 				}, this));
 			}
@@ -49,11 +50,14 @@ define([
 		},
 
 		login: function() {
-			console.log('login')
+			//console.log('login')
 			if (!views.login) {
 				views.login = new Login({
 	 				el: $('#login')
 				});
+				views.login.on('authentication:done', _.bind(function(){
+					this.navigate('todos', {trigger: true});
+				}, this));
 			}
 			views.login.show();
 		}

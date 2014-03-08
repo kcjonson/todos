@@ -97,7 +97,7 @@ define([
 		_onModelError: function(model, response) {
 			//console.log('Model Error', model, response);
 			if (response && response.status == 401) {
-				this.trigger('error:authentication')
+				this.trigger('authentication:error')
 			}
 		},
 
