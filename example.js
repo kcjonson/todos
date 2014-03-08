@@ -10,7 +10,6 @@
 	// Create Express Server
 	var server = express();
 	server.use(express.logger('dev'));
-	//server.use(express.static(__dirname + '/static'));
 	server.use(express.bodyParser());
 	server.use(express.cookieParser('testSecret'));
 	server.use(express.cookieSession({
@@ -18,16 +17,7 @@
 	}));
 	
 
-
-
-
-	// server.get('/todos.html', function(request, response, next){
-	// 	auth.requireLogin(request, response, function(){
-	// 		next();
-	// 	});
-	// });
-
-
+	// Authentication Routing Middleware
 	server.use(function(request, response, next){
 	  	//console.log('hello',);
 
@@ -35,26 +25,26 @@
 	  	var authRequired = false;
 	  	var errorResponse;
 
-	  
 	  	// API Endpoints
 	  	if (url.indexOf('/api/') >= 0) {
 	  		authRequired = true;
 	  		errorResponse = {
-  				error: 'The endpoint you are trying to reach requires authentication'
+	  			error: true,
+  				errorMessage: 'The endpoint you are trying to reach requires authentication',
+  				errorType: 'REQUIRES_AUTHENTICATION'
   			}
 	  	};
 
 	  	// Pages 
-	  	if (url.indexOf('/todos.html') >= 0) {
-	  		authRequired = true;
-	  		errorResponse = "<h1>Error</h1><p>The page you are trying to reach requires authentication</p>";
-	  	};
-
+	  	// if (url.indexOf('/todos.html') >= 0) {
+	  	// 	authRequired = true;
+	  	// 	errorResponse = "<h1>Error</h1><p>The page you are trying to reach requires authentication</p>";
+	  	// };
 
 	  	if (authRequired) {
 	  		auth.requireLogin(request, response, function(error, user){
 	  			if (error) {
-		  			response.send(errorResponse);
+		  			response.send(401, errorResponse);
 	  			}
 	  			next();
 	  		});
@@ -64,13 +54,11 @@
 	  	
 	});
 
-
+	// Router and Static Server
 	server.use(server.router);
 	server.use(express.static(__dirname + '/static'));
 
-
-	
-	
+	// Todos Endpoints
 	todos.startServer({
 		server: server
 	});
@@ -80,5 +68,4 @@
 	console.log('Starting static content server on port 3000');
 
 	
-	
-}())
+}());

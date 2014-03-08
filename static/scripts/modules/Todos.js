@@ -25,6 +25,7 @@ define([
 
 
 	// Init
+		name: 'todos',
 
 		initialize: function() {			
 			this._initializeTemplate();
@@ -40,6 +41,7 @@ define([
 				_id: "52fec37aab80e8610dfedab3"
 			});
 			this._model.on("change", _.bind(this._onModelChange, this));
+			this._model.on("error", _.bind(this._onModelError, this));
 			this._model.on("add:todos", _.bind(this._onTodoAdd, this));
 			this._model.on("remove:todos", _.bind(this._onTodoRemove, this));		
 			this._model.fetch();
@@ -61,6 +63,17 @@ define([
 				}, this));
 			};
 		},
+
+
+	// Public Functions
+
+		show: function() {
+			this.$el.removeClass('hidden');
+		},
+
+		hide: function() {
+			this.$el.addClass('hidden');
+		},
 		
 		
 	// Event Handlers
@@ -73,14 +86,19 @@ define([
 		},
 		
 		_onTodoRemove: function(todo) {
-			console.log('Todo Removed', todo);
-			//this._createTodo(todo);
-
-				
+			//console.log('Todo Removed', todo);
+			//this._createTodo(todo);	
 		},
 		
 		_onModelChange: function(model) {
-			console.log('Model Change', model, model.get('todos'));	
+			//console.log('Model Change', model, model.get('todos'));	
+		},
+
+		_onModelError: function(model, response) {
+			//console.log('Model Error', model, response);
+			if (response && response.status == 401) {
+				this.trigger('error:authentication')
+			}
 		},
 
 		_onAddActionClick: function() {
@@ -89,9 +107,7 @@ define([
 			var todoEditWidget = new TodoEdit({
 				model: this._model
 			});
-			$('body').append(todoEditWidget.el)
-
-
+			$('body').append(todoEditWidget.el);
 		},
 
 		_onCloseEditDialogClick: function() {

@@ -11,8 +11,8 @@ require.config({
   }
 });
 
-require(['./modules/Todos'], function(Todos){
-	var TodosWidget = new Todos({
-		el: $('#todos')
-	});
+
+require(['./modules/Router'], function(Router){
+  new Router;
+  Backbone.history.start();
 });
