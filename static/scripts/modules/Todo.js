@@ -28,6 +28,7 @@ define([
 			//this._initializeTemplate();			
 			if (arguments[0].model) {
 				this._model = arguments[0].model;
+				console.log(this._model)
 				this._model.on("destroy", _.bind(this._onModelDestroy, this));
 				this._model.on("change", _.bind(this._onModelChange, this));
 				this._updateDisplay();

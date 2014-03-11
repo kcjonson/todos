@@ -2,12 +2,14 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
-	'text!modules/TodoEdit.html'
+	'text!modules/TodoEdit.html',
+	'modules/TodoModel'
 ], function(
 	$,
 	_,
 	Backbone,
-	templateString
+	templateString,
+	TodoModel
 ){
 	
 	
@@ -30,9 +32,7 @@ define([
 				this._model = arguments[0].model;
 			}
 			
-			// this._editNode.addEventListener('click', _.bind(this._onEditClick, this));
-			// this._deleteNode.addEventListener('click', _.bind(this._onDeleteClick, this));
-			// this._completeNode.addEventListener('change', _.bind(this._onCompleteChange, this));
+			this._submitNode.addEventListener("click", _.bind(this._onSubmitClick, this));
 		},
 
 		render: function() {
@@ -47,6 +47,26 @@ define([
 					this[attachPointName] = attachPointNode;
 				}, this));
 			};
+		},
+
+	// Private
+
+		_onSubmitClick: function() {			
+			var todosCollection = this._model.get('todos');
+			var todoModel = new TodoModel({
+				title: this._titleNode.value,
+				description: this._descriptionNode.value,
+				created: new Date(),
+				_creationId: Math.random().toString(36).substr(2, 9)
+			});
+			todosCollection.add(todoModel);
+			this._model.on("sync", _.bind(this._onModelSync, this));
+			this._model.save();
+		},
+
+		_onModelSync: function() {
+			this.undelegateEvents();
+			this.remove();
 		}
 
 		

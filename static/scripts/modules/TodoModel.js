@@ -1,20 +1,37 @@
 define([
 	'jquery',
 	'underscore',
-	'backbone-loader'
+	'backbone-loader',
+	'modules/CategoryModel'
 ], function(
 	$,
 	_,
-	Backbone
+	Backbone,
+	CategoryModel
 ){
+
+	var categoriesCollection = Backbone.Collection.extend({
+	 	model: CategoryModel
+	});
 
 	var todoModel = Backbone.RelationalModel.extend({
 		urlRoot: 'api/todo',
 		idAttribute: '_id',
 		defaults: {
 			'completed': false,
-			'title': 'Untitled'
-		}
+			'title': 'Untitled',
+			'categories': [
+				{_id: '531e56d8edb97900003c17f6'}
+			]
+		},
+		relations: [
+			{
+				type: Backbone.HasMany,
+				key: 'categories',
+				relatedModel: CategoryModel,
+				collectionType: categoriesCollection
+			}
+		]
 	});
 
 

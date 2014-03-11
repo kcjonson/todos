@@ -31,9 +31,9 @@ define([
 			this._initializeTemplate();
 			this._initializeModel();
 			
-			this._closeEditDialogNode.addEventListener("click", _.bind(this._onCloseEditDialogClick, this));
+			//this._closeEditDialogNode.addEventListener("click", _.bind(this._onCloseEditDialogClick, this));
 			this._addActionNode.addEventListener("click", _.bind(this._onAddActionClick, this));
-			this._submitNode.addEventListener("click", _.bind(this._onSubmitClick, this));
+			//
 		},
 		
 		_initializeModel: function() {		
@@ -80,9 +80,7 @@ define([
 	
 		_onTodoAdd: function(todo) {
 			console.log('Todo Added', todo);
-			this._createTodo(todo);
-
-				
+			this._createTodo(todo);	
 		},
 		
 		_onTodoRemove: function(todo) {
@@ -103,7 +101,6 @@ define([
 
 		_onAddActionClick: function() {
 			//$(this._addDialogNode).toggleClass('hidden');
-
 			var todoEditWidget = new TodoEdit({
 				model: this._model
 			});
@@ -111,24 +108,10 @@ define([
 		},
 
 		_onCloseEditDialogClick: function() {
-			$(this._addDialogNode).toggleClass('hidden');
+			//$(this._addDialogNode).toggleClass('hidden');
 		},
 		
-		_onSubmitClick: function() {			
-			var todosCollection = this._model.get('todos');
-			var todoModel = new TodoModel({
-				title: this._titleNode.value,
-				description: this._descriptionNode.value,
-				created: new Date(),
-				_creationId: Math.random().toString(36).substr(2, 9)
-			});
-			todosCollection.add(todoModel);
-			this._model.save();
-			$(this._addDialogNode).toggleClass('hidden');
-			
-			this._titleNode.value = "";
-			this._descriptionNode.value = "";
-		},
+
 		
 		
 	// Utilities 
